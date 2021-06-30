@@ -40,26 +40,7 @@ header {
   transition: all 0.5s; /* アニメーションの設定 all=変化の対象 0.5s=変化にかかる時間 hoverと組み合わせることが多い */
 }
 
-.header-right a:hover {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.5
-  ); /* マウスが乗せられた際の色と透明度を設定 */
-}
-
 /* fontawesome(カートアイコン＆ログインアイコンの設定) */
 .fas {
   margin-right: 5px;
 }
-
-/* スマートフォン用のメニューアイコン */
-.menu-icon {
-  display: none; /* メディアクエリで画面がスマホサイズになるまでは非表示 */
-  color: gray;
-  float: right;
-  font-size: 25px;
-  padding: 21px 0;
-}
-
