@@ -21,11 +21,11 @@ const routes: Array<RouteConfig> = [
   //   name: "CompEmployeeDetail",
   //   component: () => import("../components/CompEmployeeDetail.vue"),
   // },
-  // {
-  //   path: "/compEmployeeList",
-  //   name: "CompEmployeeList",
-  //   component: () => import("../components/CompEmployeeList.vue"),
-  // },
+  {
+    path: "/employeeList",
+    name: "employeeList",
+    component: () => import("../components/EmployeeList.vue"),
+  },
   // {
   //   path: "/compRegisterAdmin",
   //   name: "CompRegisterAdmin",
