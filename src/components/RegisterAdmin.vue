@@ -101,7 +101,7 @@ export default class RegisterAdmin extends Vue {
         console.dir("response:" + JSON.stringify(response));
         if (response.data.status == "success") {
           // ログイン画面に遷移する
-          this["$router"].push("/compLoginAdmin");
+          this["$router"].push("/loginAdmin");
         } else {
           this.errorMessage =
             "登録できませんでした(" + response.data.message + ")";
