@@ -27,11 +27,11 @@ const routes: Array<RouteConfig> = [
     name: "employeeList",
     component: () => import("../components/EmployeeList.vue"),
   },
-  // {
-  //   path: "/compRegisterAdmin",
-  //   name: "CompRegisterAdmin",
-  //   component: () => import("../components/CompRegisterAdmin.vue"),
-  // },
+  {
+    path: "/registerAdmin",
+    name: "registerAdmin",
+    component: () => import("../components/RegisterAdmin.vue"),
+  },
   // {
   //   path: "/compLoginAdmin",
   //   name: "CompLoginAdmin",
