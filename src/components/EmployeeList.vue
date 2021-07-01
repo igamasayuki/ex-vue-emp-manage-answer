@@ -16,7 +16,7 @@
           <tbody>
             <tr v-for="employee of getEmployees" v-bind:key="employee.id">
               <td>
-                <router-link :to="'/compEmployeeDetail/' + employee.id">{{
+                <router-link :to="'/employeeDetail/' + employee.id">{{
                   employee.name
                 }}</router-link>
               </td>

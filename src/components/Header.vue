@@ -9,9 +9,9 @@
         </div>
 
         <div class="header-right">
-          <router-link to="/compRegisterAdmin">管理者登録</router-link>
+          <router-link to="/registerAdmin">管理者登録</router-link>
           <router-link to="/employeeList">従業員一覧</router-link>
-          <router-link to="/compLoginAdmin"
+          <router-link to="/loginAdmin"
             ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
           >
           <a href="login.html" class="login">

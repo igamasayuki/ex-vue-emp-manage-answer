@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from "vue";
+import VueRouter, { RouteConfig } from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   // {
@@ -17,10 +17,11 @@ const routes: Array<RouteConfig> = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
-  //   path: "/compEmployeeDetail/:id",
-  //   name: "CompEmployeeDetail",
-  //   component: () => import("../components/CompEmployeeDetail.vue"),
-  // },
+  {
+    path: "/employeeDetail/:id",
+    name: "employeeDetail",
+    component: () => import("../components/EmployeeDetail.vue"),
+  },
   {
     path: "/employeeList",
     name: "employeeList",
@@ -41,12 +42,12 @@ const routes: Array<RouteConfig> = [
   //   path: "*",
   //   redirect: "/",
   // },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
