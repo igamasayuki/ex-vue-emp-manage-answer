@@ -90,7 +90,7 @@ export default class RegisterAdmin extends Vue {
   errorMessage = "";
 
   // 非同期でWebAPIを呼び出しログインする
-  async registerAdmin() {
+  async registerAdmin(): Promise<void> {
     await axios
       .post("http://localhost:8080/ex-emp/insert", {
         name: this.lastName + " " + this.firstName,

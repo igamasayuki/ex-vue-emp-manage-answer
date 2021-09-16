@@ -3,7 +3,7 @@
     <div class="container">
       <div class="header">
         <div class="header-left">
-          <router-link to="/compLoginAdmin"
+          <router-link to="/"
             ><img class="logo" src="img/header_logo.png"
           /></router-link>
         </div>

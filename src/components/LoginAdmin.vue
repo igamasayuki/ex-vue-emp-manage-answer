@@ -49,7 +49,9 @@
           <div class="row">
             <div class="input-field col s6 m6 l6">
               <p class="margin medium-small">
-                <router-link to="/registerAdmin">管理者登録はこちら</router-link>
+                <router-link to="/registerAdmin"
+                  >管理者登録はこちら</router-link
+                >
               </p>
             </div>
           </div>
@@ -70,22 +72,19 @@ export default class LoginAdmin extends Vue {
   password = "";
 
   // 非同期でWebAPIを呼び出し管理者情報を登録する
-  async loginAdmin() {
-    await axios
-      .post("http://localhost:8080/ex-emp/login", {
-        mailAddress: this.mailAddress,
-        password: this.password,
-      })
-      .then((response) => {
-        console.dir("response:" + JSON.stringify(response));
-        if (response.data.status == "success") {
-          // 従業員一覧に遷移する
-          this["$router"].push("/employeeList");
-        } else {
-          this.errorMessage =
-            "ログインに失敗しました(" + response.data.message + ")";
-        }
-      });
+  async loginAdmin(): Promise<void> {
+    const response = await axios.post("http://localhost:8080/ex-emp/login", {
+      mailAddress: this.mailAddress,
+      password: this.password,
+    });
+    console.dir("response:" + JSON.stringify(response));
+    if (response.data.status == "success") {
+      // 従業員一覧に遷移する
+      this["$router"].push("/employeeList");
+    } else {
+      this.errorMessage =
+        "ログインに失敗しました(" + response.data.message + ")";
+    }
   }
 }
 </script>

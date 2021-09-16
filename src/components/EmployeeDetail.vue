@@ -109,6 +109,7 @@
                 </td>
               </tr>
             </table>
+
             <button
               class="btn btn-register waves-effect waves-light"
               type="submit"
@@ -130,7 +131,7 @@ import { Employee } from "../types/employee";
 
 @Component
 export default class EmployeeDetail extends Vue {
-  currentEmployee? = null;
+  currentEmployee = null;
   // currentEmployee :Employee;
   currentEmployeeId = 0;
   currentDependentsCount = 0;

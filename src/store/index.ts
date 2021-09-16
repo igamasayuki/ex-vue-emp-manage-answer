@@ -16,6 +16,39 @@ export default new Vuex.Store({
     totalEmployeeCount: 0,
     employees: new Array<Employee>(),
   },
+  actions: {
+    /**
+     * 従業員一覧情報をWebAPIから取得する.
+     *
+     * @param context コンテキスト
+     */
+    async getEmployeeList(context) {
+      const response = await axios.get(
+        "http://localhost:8080/ex-emp/employee/employees"
+      );
+      console.dir("response:" + JSON.stringify(response));
+      const payload = response.data; // responseデータの中のdataをペイロードに渡す
+      context.commit("addEmployeeList", payload); // ミューテーションの呼び出し
+    },
+    /**
+     * 扶養人数を更新する.
+     *
+     * @param context コンテキスト
+     * @param payload ペイロード(従業員IDと扶養人数)
+     */
+    async updateEmployee(context, payload) {
+      const response = await axios.post(
+        "http://localhost:8080/ex-emp/employee/update",
+        {
+          id: payload.employee.id,
+          dependentsCount: payload.employee.dependentsCount,
+        }
+      );
+      console.dir("response:" + JSON.stringify(response));
+      // 従業員一覧ページへ(アクションの呼び出し)
+      context.dispatch("getEmployeeList");
+    },
+  }, // end actions
   mutations: {
     addEmployeeList(state, payload) {
       // console.dir("payload:" + JSON.stringify(payload));
@@ -51,31 +84,5 @@ export default new Vuex.Store({
       return state.employees;
     },
   }, // end getters
-  actions: {
-    async getEmployeeList({ commit }, payload) {
-      await axios
-        .get("http://localhost:8080/ex-emp/employee/employees")
-        .then((response) => {
-          // console.dir("response:" + JSON.stringify(response));
-          payload = response.data; // responseデータの中のdataをペイロードに渡す
-        });
-      commit("addEmployeeList", payload); // ミューテーションの呼び出し
-    },
-    async updateEmployee(context, payload) {
-      await axios
-        .post("http://localhost:8080/ex-emp/employee/update", {
-          id: payload.employee.id,
-          dependentsCount: payload.employee.dependentsCount,
-        })
-        .then((response) => {
-          console.dir("response:" + JSON.stringify(response));
-          // payload = response.data; // responseデータの中のdataをペイロードに渡す
-        });
-      // ミューテーションの呼び出し
-      // context.commit("addEmployeeList", payload);
-      // 従業員一覧ページへ
-      context.dispatch("getEmployeeList", payload);
-    },
-  }, // end actions
   modules: {},
 });

@@ -24,11 +24,11 @@ const routes: Array<RouteConfig> = [
     name: "loginAdmin",
     component: () => import("../components/LoginAdmin.vue"),
   },
-  // 最終的な受け皿
-  // {
-  //   path: "*",
-  //   redirect: "/",
-  // },
+  // パスが登録されていない場合はログイン画面へ
+  {
+    path: "*",
+    component: () => import("../components/LoginAdmin.vue"),
+  },
 ];
 
 const router = new VueRouter({
