@@ -35,7 +35,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class EmployeeList extends Vue {
   /**
-   * 非同期でWebAPIから従業員一覧を取得する.
+   * Vuexストアのアクション経由で非同期でWebAPIから従業員一覧を取得する.
    *
    * @remarks
    * インスタンスがページに紐つけられたタイミングで
@@ -52,7 +52,6 @@ export default class EmployeeList extends Vue {
    * @returns 従業員数
    */
   get getEmployeeCount(): void {
-    // return this["$store"].state.totalEmployeeCount;
     return this["$store"].getters.getEmployeeCount;
   }
   /**

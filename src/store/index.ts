@@ -15,28 +15,6 @@ export default new Vuex.Store({
     employees: new Array<Employee>(),
   },
   actions: {
-    // /**
-    //  * 管理者情報を登録する.
-    //  *
-    //  * @param context コンテキスト
-    //  * @param payload ペイロード(管理者名、メールアドレス、パスワード)
-    //  */
-    // async registerAdmin(context, payload) {
-    //   alert("Vuexストア#registerAdmin()呼ばれた");
-    //   // alert("payload" + payload);
-    //   // console.dir("payload:" + JSON.stringify(payload));
-    //   // WebAPIを使用して管理者情報を登録する
-    //   const response = await axios.post("http://localhost:8080/ex-emp/insert", {
-    //     name: payload.administrator.name,
-    //     mailAddress: payload.administrator.mailAddress,
-    //     password: payload.administrator.password,
-    //   });
-    //   // 取得したJSONデータをコンソールに出力して確認
-    //   console.dir("response:" + JSON.stringify(response));
-    //   if (response.data.status !== "success") {
-    //     throw new Error("登録できませんでした(" + response.data.message + ")");
-    //   }
-    // },
     /**
      * 従業員一覧情報をWebAPIから取得する.
      *
@@ -103,7 +81,6 @@ export default new Vuex.Store({
           )
         );
       }
-      // console.log("employees:" + state.employees);
     },
   }, // end mutations
   getters: {
