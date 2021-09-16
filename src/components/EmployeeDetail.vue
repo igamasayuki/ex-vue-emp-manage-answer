@@ -1,29 +1,10 @@
 <template>
-  <!-- <div class="show-employee-detail">
-    <div>{{ currentEmployee.id }}</div>
-    <div>{{ currentEmployee.name }}</div>
-    <div>{{ currentEmployee.image }}</div>
-    <div>{{ currentEmployee.gender }}</div>
-    <div>{{ currentEmployee.hireDate }}</div>
-    <div>{{ currentEmployee.mailAddress }}</div>
-    <div>{{ currentEmployee.zipCode }}</div>
-    <div>{{ currentEmployee.address }}</div>
-    <div>{{ currentEmployee.telephone }}</div>
-    <div>{{ currentEmployee.salary }}</div>
-    <div>{{ currentEmployee.image }}</div>
-    <div>{{ currentEmployee.characteristics }}</div>
-    <div>{{ currentEmployee.dependentsCount }}</div>
-    <form>
-      <input type="text" v-model="currentDependentsCount" />
-      <button type="button" v-on:click="update">更新</button>
-    </form>
-  </div> -->
   <div class="container">
     <div class="row">
       <form action="employeeList.html">
         <fieldset>
           <legend>従業員情報</legend>
-
+          <div class="error">{{ errorMessage }}</div>
           <form>
             <table class="striped">
               <tr>
@@ -104,7 +85,6 @@
                       v-model="currentDependentsCount"
                       required
                     />
-                    <!-- <label for="dependentsCount">扶養人数</label> -->
                   </div>
                 </td>
               </tr>
@@ -112,7 +92,7 @@
 
             <button
               class="btn btn-register waves-effect waves-light"
-              type="submit"
+              type="button"
               name="action"
               v-on:click="update"
             >
@@ -128,12 +108,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Employee } from "../types/employee";
+import axios from "axios";
 
 @Component
 export default class EmployeeDetail extends Vue {
-  currentEmployee = null;
-  // currentEmployee :Employee;
-  currentEmployeeId = 0;
+  // !はこの変数がnullでないことを保証する(Non-null assertion operator)
+  // !がないと、update時の「this.currentEmployee.id」部分でコンパイルエラーになる
+  currentEmployee!: Employee;
+  errorMessage = "";
   currentDependentsCount = 0;
 
   // ライフサイクルフック(インスタンスが生成タイミング：mountedだとcurrentEmployeeがnullのためエラーが出る)
@@ -142,29 +124,41 @@ export default class EmployeeDetail extends Vue {
 
     const employeeId = parseInt(this["$route"].params.id);
     console.log("employeeId:" + employeeId);
-
-    this.currentEmployee = this["$store"].state.employees.find(
-      (element: Employee) => element.id == employeeId
-    );
-    this.currentEmployeeId = this.currentEmployee.id;
+    this.currentEmployee = this["$store"].getters.getEmployeeById(employeeId);
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
-    console.log(this.currentEmployee);
   }
 
-  // 非同期でWebAPIを呼び出し扶養人数を更新する
-  update(): void {
-    console.log("this.currentEmployeeId : " + this.currentEmployeeId);
-    console.log("this.currentDependentsCount : " + this.currentDependentsCount);
-    // console.log("this.currentEmployeeId : " + this.currentEmployee!.id);
-    // console.log("this.currentDependentsCount : " + this.currentEmployee!.id);
-    this["$store"].dispatch("updateEmployee", {
-      employee: {
-        id: this.currentEmployeeId,
+  /**
+   * 扶養人数を更新する.
+   *
+   * 本メソッドは非同期でWebAPIを呼び出し扶養人数を更新するためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
+   * @returns Promiseオブジェクト
+   */
+  async update(): Promise<void> {
+    console.log(this.currentEmployee.id);
+    console.log(this.currentDependentsCount);
+    const response = await axios.post(
+      "http://localhost:8080/ex-emp/employee/update",
+      {
+        id: this.currentEmployee.id,
         dependentsCount: this.currentDependentsCount,
-      },
-    });
-    // 従業員一覧画面に遷移する
-    this["$router"].push("/employeeList");
+      }
+    );
+    console.dir("response:" + JSON.stringify(response));
+
+    if (response.data.status === "success") {
+      // 成功なら従業員一覧画面に遷移する
+      this["$router"].push("/employeeList");
+    } else {
+      // 失敗ならエラーメッセージを表示する
+      this.errorMessage = "更新できませんでした(" + response.data.message + ")";
+    }
   }
 }
 </script>
+
+<style scoped>
+.error {
+  color: red;
+}
+</style>

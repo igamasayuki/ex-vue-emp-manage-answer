@@ -32,24 +32,6 @@ export default new Vuex.Store({
       // ミューテーションの呼び出し、先程取得したデータをペイロードとして渡す
       context.commit("showEmployeeList", payload);
     },
-    /**
-     * 扶養人数を更新する.
-     *
-     * @param context コンテキスト
-     * @param payload ペイロード(従業員IDと扶養人数)
-     */
-    async updateEmployee(context, payload) {
-      const response = await axios.post(
-        "http://localhost:8080/ex-emp/employee/update",
-        {
-          id: payload.employee.id,
-          dependentsCount: payload.employee.dependentsCount,
-        }
-      );
-      console.dir("response:" + JSON.stringify(response));
-      // 従業員一覧ページへ(アクションの呼び出し)
-      context.dispatch("getEmployeeList");
-    },
   }, // end actions
   mutations: {
     /**
@@ -85,20 +67,6 @@ export default new Vuex.Store({
   }, // end mutations
   getters: {
     /**
-     * 指定されたメールアドレスに一致する従業員の配列を返す.
-     *
-     * @param state ステート
-     * @returns 指定されたメールアドレスに一致する従業員の配列
-     */
-    getSearchStudentByMailAddress(state) {
-      // 部分一致で絞り込んだStudentオブジェクトのみを返す
-      return (mailAddress: string) => {
-        return state.employees.filter(
-          (employee) => employee.mailAddress === mailAddress
-        );
-      };
-    },
-    /**
      * 従業員数を返す.
      *
      * @param state ステート
@@ -111,10 +79,25 @@ export default new Vuex.Store({
      * 従業員一覧を返す.
      *
      * @param state ステート
-     * @returns 従業員一覧
+     * @returns 従業員一覧情報「
      */
     getEmployees(state) {
       return state.employees;
+    },
+    /**
+     * IDから従業員を検索し返す.
+     *
+     * @param state ステート
+     * @returns 従業員情報
+     */
+    getEmployeeById(state) {
+      // 部分一致で絞り込んだStudentオブジェクトのみを返す
+      return (employeeId: number) => {
+        const employees = state.employees.filter(
+          (employee) => employee.id == employeeId
+        );
+        return employees[0];
+      };
     },
   }, // end getters
   modules: {},

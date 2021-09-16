@@ -13,9 +13,9 @@
           <router-link to="/loginAdmin"
             ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
           >
-          <a href="login.html" class="login">
+          <!-- <a href="login.html" class="login">
             <i class="fas fa-sign-in-alt"></i>ログアウト(未完成)
-          </a>
+          </a> -->
         </div>
       </div>
     </div>
