@@ -1,16 +1,21 @@
+/**
+ * 管理者情報を表すクラス.
+ *
+ * @remarks
+ * 管理者情報を表します。
+ */
 export class Administrator {
-  // private _id: number;
-  // private _name: string;
-  // private _mailAddress: string;
-  // private _password: string;
-
   constructor(
+    // ID
     private _id: number,
+    // 名前
     private _name: string,
+    // メールアドレス
     private _mailAddress: string,
+    // パスワード
     private _password: string
   ) {}
-  
+
   public get id(): number {
     return this._id;
   }

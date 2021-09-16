@@ -1,16 +1,34 @@
+/**
+ * 従業員情報を表すクラス.
+ *
+ * @remarks
+ * 従業員情報を表します。
+ */
 export class Employee {
   constructor(
+    // ID
     private _id: number,
+    // 名前
     private _name: string,
+    // 画像
     private _image: string,
+    // 性別
     private _gender: string,
+    // 入社び
     private _hireDate: string,
+    // メールアドレス
     private _mailAddress: string,
+    // 郵便番号
     private _zipCode: string,
+    // 住所
     private _address: string,
+    // 電話番号
     private _telephone: string,
+    // 給料
     private _salary: number,
+    // 特性
     private _characteristics: string,
+    // 扶養人数
     private _dependentsCount: number
   ) {}
   public get id(): number {
