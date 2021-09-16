@@ -1,12 +1,4 @@
 <template>
-  <!-- <div class="registerAdmin">
-    <div class="error">{{ errorMessage }}</div>
-    <form>
-      <div>メールアドレス：<input type="text" v-model="mailAddress" /></div>
-      <div>パスワード：<input type="password" v-model="password" /></div>
-      <button type="button" v-on:click="loginAdmin">ログイン</button>
-    </form>
-  </div> -->
   <div class="container">
     <div class="row login-page">
       <div class="col s12 z-depth-6 card-panel">
@@ -71,7 +63,13 @@ export default class LoginAdmin extends Vue {
   mailAddress = "";
   password = "";
 
-  // 非同期でWebAPIを呼び出し管理者情報を登録する
+  /**
+   * ログインする.
+   *
+   * @remarks
+   * 本メソッドは非同期でWebAPIを呼び出しログインをするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
+   * @returns Promiseオブジェクト
+   */
   async loginAdmin(): Promise<void> {
     const response = await axios.post("http://localhost:8080/ex-emp/login", {
       mailAddress: this.mailAddress,
