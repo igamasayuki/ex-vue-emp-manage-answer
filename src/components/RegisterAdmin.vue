@@ -1,17 +1,11 @@
 <template>
-  <!-- <div class="registerAdmin">
-    <div class="error">{{ errorMessage }}</div>
-    <form>
-      <div>名前：<input type="text" v-model="name" /></div>
-      <div>メールアドレス：<input type="text" v-model="mailAddress" /></div>
-      <div>パスワード：<input type="password" v-model="password" /></div>
-      <button type="button" v-on:click="registerAdmin">登録</button>
-    </form>
-  </div> -->
   <div class="container">
     <div class="row register-page">
+      <div class="error" v-for="error of errors" v-bind:key="error">
+        {{ error }}
+      </div>
       <div class="error">{{ errorMessage }}</div>
-      <form class="col s12" id="reg-form" action="login.html">
+      <form class="col s12" id="reg-form">
         <div class="row">
           <div class="input-field col s6">
             <input
@@ -63,7 +57,7 @@
           <div class="input-field col s6">
             <button
               class="btn btn-large btn-register waves-effect waves-light"
-              type="submit"
+              type="button"
               name="action"
               v-on:click="registerAdmin"
             >
@@ -83,30 +77,51 @@ import axios from "axios";
 
 @Component
 export default class RegisterAdmin extends Vue {
+  errors: Array<string> = [];
+  errorMessage = "";
   lastName = "";
   firstName = "";
   mailAddress = "";
   password = "";
-  errorMessage = "";
 
-  // 非同期でWebAPIを呼び出しログインする
+  /**
+   * 管理者情報を登録する.
+   *
+   * @remarks
+   * 本メソッドは非同期でWebAPIを呼び出し管理者登録をするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
+   * @returns Promiseオブジェクト
+   */
   async registerAdmin(): Promise<void> {
-    await axios
-      .post("http://localhost:8080/ex-emp/insert", {
-        name: this.lastName + " " + this.firstName,
-        mailAddress: this.mailAddress,
-        password: this.password,
-      })
-      .then((response) => {
-        console.dir("response:" + JSON.stringify(response));
-        if (response.data.status == "success") {
-          // ログイン画面に遷移する
-          this["$router"].push("/loginAdmin");
-        } else {
-          this.errorMessage =
-            "登録できませんでした(" + response.data.message + ")";
-        }
-      });
+    // エラーチェック
+    this.errors = [];
+    if (this.lastName === "" || this.firstName === "") {
+      this.errors.push("姓または名が入力されていません");
+    }
+    if (this.mailAddress === "") {
+      this.errors.push("メールアドレスが入力されていません");
+    }
+    if (this.password === "") {
+      this.errors.push("パスワードが入力されていません");
+    }
+    // エラーが１つ以上あれば処理を止める
+    if (0 < this.errors.length) {
+      return;
+    }
+
+    // 管理者登録処理
+    const response = await axios.post("http://localhost:8080/ex-emp/insert", {
+      name: this.lastName + " " + this.firstName,
+      mailAddress: this.mailAddress,
+      password: this.password,
+    });
+    console.dir("response:" + JSON.stringify(response));
+    if (response.data.status === "success") {
+      // 成功ならログイン画面に遷移する
+      this["$router"].push("/loginAdmin");
+    } else {
+      // 失敗ならエラーメッセージを表示する
+      this.errorMessage = "登録できませんでした(" + response.data.message + ")";
+    }
   }
 }
 </script>

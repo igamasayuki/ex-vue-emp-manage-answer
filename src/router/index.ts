@@ -25,10 +25,10 @@ const routes: Array<RouteConfig> = [
     component: () => import("../components/LoginAdmin.vue"),
   },
   // パスが登録されていない場合はログイン画面へ
-  {
-    path: "*",
-    component: () => import("../components/LoginAdmin.vue"),
-  },
+  // {
+  //   path: "*",
+  //   component: () => import("../components/LoginAdmin.vue"),
+  // },
 ];
 
 const router = new VueRouter({
