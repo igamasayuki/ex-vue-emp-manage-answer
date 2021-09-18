@@ -31,7 +31,6 @@
               <button
                 class="btn btn-register waves-effect waves-light col s12"
                 type="button"
-                name="action"
                 v-on:click="loginAdmin"
               >
                 ログイン

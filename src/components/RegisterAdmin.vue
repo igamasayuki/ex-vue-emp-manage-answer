@@ -135,7 +135,4 @@ export default class RegisterAdmin extends Vue {
 .register-page {
   width: 600px;
 }
-.error {
-  color: red;
-}
 </style>

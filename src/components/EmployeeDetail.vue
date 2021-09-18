@@ -156,9 +156,3 @@ export default class EmployeeDetail extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.error {
-  color: red;
-}
-</style>

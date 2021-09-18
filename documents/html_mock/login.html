@@ -15,6 +15,7 @@
       href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <meta charset="UTF-8" />
@@ -22,9 +23,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .top-wrapper {
-        padding-top: 100px;
-      }
       .login-page {
         width: 600px;
       }
@@ -51,13 +49,17 @@
       <div class="container">
         <div class="row login-page">
           <div class="col s12 z-depth-6 card-panel">
+            <div class="error">エラーメッセージ</div>
             <form class="login-form" action="employeeList.html">
               <div class="row"></div>
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">mail_outline</i>
-                  <input class="validate" id="email" type="email" />
-                  <label for="email" data-error="wrong" data-success="right"
+                  <input class="validate" id="mailAddress" type="email" />
+                  <label
+                    for="mailAddress"
+                    data-error="wrong"
+                    data-success="right"
                     >メールアドレス</label
                   >
                 </div>
@@ -73,8 +75,6 @@
                 <div class="input-field col s12">
                   <button
                     class="btn btn-register waves-effect waves-light col s12"
-                    type="submit"
-                    name="action"
                   >
                     ログイン
                   </button>
