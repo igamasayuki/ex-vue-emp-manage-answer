@@ -16,7 +16,7 @@ export default new Vuex.Store({
   },
   actions: {
     /**
-     * 従業員一覧情報をWebAPIから取得する.
+     * 従業員一覧情報をWebAPIから取得してmutationを呼び出す.
      *
      * @param context コンテキスト
      */
@@ -27,23 +27,28 @@ export default new Vuex.Store({
       );
       // 取得したJSONデータをコンソールに出力して確認
       console.dir("response:" + JSON.stringify(response));
-      // responseデータの中のdataを取り出す
+      // 取得したresponseデータの中のdataを取り出してpayload変数に格納する
       const payload = response.data;
-      // ミューテーションの呼び出し、先程取得したデータをペイロードとして渡す
+      // showEmployeeListという名前のミューテーションを呼び出す
+      // (contextオブジェクトのcommitメソッドを呼び出す)
+      // その際、先程payload変数に格納したデータを第２引数に渡す
       context.commit("showEmployeeList", payload);
     },
   }, // end actions
   mutations: {
     /**
-     * 従業員一覧情報を作成して表示する.
+     * 従業員一覧情報を作成してstateに格納する.
      *
      * @param context コンテキスト
      * @param payload WebAPIから取得した従業員情報(JSON)
      */
     showEmployeeList(state, payload) {
       // console.dir("payload:" + JSON.stringify(payload));
-      console.log("totalEmployeeCount:" + payload.totalEmployees);
+      console.log("totalEmployeeCount:" + payload.totalEmployeeCount);
+      // payloadの中(WebAPIから取得したJSON)のtotalEmployeeCountをstateのtotalEmployeeCountに代入する
       state.totalEmployeeCount = payload.totalEmployees;
+      // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
+      // stateのemployeesにpushする
       state.employees = new Array<Employee>();
       for (const employee of payload.employees) {
         state.employees.push(
@@ -91,7 +96,7 @@ export default new Vuex.Store({
      * @returns 従業員情報
      */
     getEmployeeById(state) {
-      // 部分一致で絞り込んだStudentオブジェクトのみを返す
+      // 渡されたIDで絞り込んだEmployeeオブジェクトを1件返す
       return (employeeId: number) => {
         const employees = state.employees.filter(
           (employee) => employee.id == employeeId

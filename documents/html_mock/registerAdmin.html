@@ -28,6 +28,9 @@
       .register-page {
         width: 600px;
       }
+      .error {
+        color: red;
+      }
     </style>
   </head>
 
@@ -50,6 +53,7 @@
     <div class="top-wrapper">
       <div class="container">
         <div class="row register-page">
+          <div class="error">エラーメッセージ</div>
           <form class="col s12" id="reg-form">
             <div class="row">
               <div class="input-field col s6">
@@ -84,7 +88,6 @@
                 <button
                   class="btn btn-large btn-register waves-effect waves-light"
                   type="button"
-                  name="action"
                 >
                   登録
                   <i class="material-icons right">done</i>

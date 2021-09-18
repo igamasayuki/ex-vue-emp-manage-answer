@@ -58,7 +58,6 @@
             <button
               class="btn btn-large btn-register waves-effect waves-light"
               type="button"
-              name="action"
               v-on:click="registerAdmin"
             >
               登録
@@ -77,11 +76,17 @@ import axios from "axios";
 
 @Component
 export default class RegisterAdmin extends Vue {
+  // 入力値チェックのエラーメッセージ
   errors: Array<string> = [];
+  // 登録失敗時のエラーメッセージ
   errorMessage = "";
+  // 姓
   lastName = "";
+  // 名
   firstName = "";
+  // メールアドrす
   mailAddress = "";
+  // パスワード
   password = "";
 
   /**
@@ -127,6 +132,9 @@ export default class RegisterAdmin extends Vue {
 </script>
 
 <style scoped>
+.register-page {
+  width: 600px;
+}
 .error {
   color: red;
 }
