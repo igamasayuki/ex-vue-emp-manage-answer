@@ -1,36 +1,35 @@
 <template>
-  <div class="show-employee-list">
-    <div class="container">
-      <div>従業員数:{{ getEmployeeCount }}人</div>
-      <div class="row">
-        <table class="striped">
-          <thead>
-            <tr>
-              <th>名前</th>
-              <th>入社日</th>
-              <th>扶養人数</th>
-            </tr>
-          </thead>
+  <div class="container">
+    <div>従業員数:{{ getEmployeeCount }}人</div>
+    <div class="row">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>入社日</th>
+            <th>扶養人数</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <tr v-for="employee of getEmployees" v-bind:key="employee.id">
-              <td>
-                <router-link :to="'/employeeDetail/' + employee.id">{{
-                  employee.name
-                }}</router-link>
-              </td>
-              <td>{{ employee.hireDate }}</td>
-              <td>{{ employee.dependentsCount }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <tbody>
+          <tr v-for="employee of getEmployees" v-bind:key="employee.id">
+            <td>
+              <router-link :to="'/employeeDetail/' + employee.id">{{
+                employee.name
+              }}</router-link>
+            </td>
+            <td>{{ employee.hireDate }}</td>
+            <td>{{ employee.dependentsCount }}人</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { Employee } from "@/types/employee";
 
 @Component
 export default class EmployeeList extends Vue {
@@ -51,7 +50,7 @@ export default class EmployeeList extends Vue {
    *
    * @returns 従業員数
    */
-  get getEmployeeCount(): void {
+  get getEmployeeCount(): number {
     return this["$store"].getters.getEmployeeCount;
   }
   /**
@@ -59,7 +58,7 @@ export default class EmployeeList extends Vue {
    *
    * @returns 従業員一覧情報
    */
-  get getEmployees(): void {
+  get getEmployees(): Array<Employee> {
     return this["$store"].getters.getEmployees;
   }
 }
