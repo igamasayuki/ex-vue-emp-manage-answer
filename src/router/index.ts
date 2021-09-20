@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    path: "/logoutAdmin",
+    component: () => import("../components/LoginAdmin.vue"),
+  },
+  {
     path: "/employeeDetail/:id",
     component: () => import("../components/EmployeeDetail.vue"),
   },

@@ -9,13 +9,15 @@
         </div>
 
         <div class="header-right">
-          <router-link to="/registerAdmin">管理者登録</router-link>
-          <router-link to="/loginAdmin"
-            ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
-          >
-          <!-- <a href="login.html" class="login">
-            <i class="fas fa-sign-in-alt"></i>ログアウト(未完成)
-          </a> -->
+          <router-link to="/registerAdmin">
+            管理者登録
+          </router-link>
+          <router-link to="/loginAdmin">
+            <i class="fas fa-sign-in-alt"></i>ログイン
+          </router-link>
+          <router-link to="/logoutAdmin">
+            <i class="fas fa-sign-in-alt"></i>ログアウト
+          </router-link>
         </div>
       </div>
     </div>
