@@ -37,11 +37,11 @@ export default class EmployeeList extends Vue {
    * Vuexストアのアクション経由で非同期でWebAPIから従業員一覧を取得する.
    *
    * @remarks
-   * インスタンスがページに紐つけられたタイミングで
+   * Vueインスタンスが生成されたタイミングで
    * Vuexストア内のアクションを呼ぶ(ディスパッチする)。
-   * ライフサイクルフックのmountedイベント利用
+   * ライフサイクルフックのcreatedイベント利用
    */
-  mounted(): void {
+  created(): void {
     this["$store"].dispatch("getEmployeeList");
   }
 
