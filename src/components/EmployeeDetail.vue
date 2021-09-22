@@ -98,7 +98,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Employee } from "../types/employee";
+// import { Employee } from "../types/employee";
+import { Employee } from "@/types/employee";
 import axios from "axios";
 
 @Component

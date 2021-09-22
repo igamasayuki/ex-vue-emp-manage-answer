@@ -13,7 +13,7 @@ export default new Vuex.Store({
   state: {
     totalEmployeeCount: 0,
     employees: new Array<Employee>(),
-  },
+  }, // end state
   actions: {
     /**
      * 従業員一覧情報をWebAPIから取得してmutationを呼び出す.
@@ -105,5 +105,5 @@ export default new Vuex.Store({
       };
     },
   }, // end getters
-  modules: {},
+  modules: {}, // end modules
 });
