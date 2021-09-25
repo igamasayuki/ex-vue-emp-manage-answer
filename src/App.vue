@@ -31,4 +31,14 @@ export default {
   color: #2c3e50;
   /* margin-top: 60px; */
 }
+
+/* 全てのページに対して上記メニューバー分の100pxを空ける */
+.top-wrapper {
+  padding-top: 100px;
+}
+
+/* エラーメッセージを赤字に設定 */
+.error {
+  color: red;
+}
 </style>
