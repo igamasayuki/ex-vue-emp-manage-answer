@@ -14,8 +14,8 @@ export class Employee {
     private _image: string,
     // 性別
     private _gender: string,
-    // 入社び
-    private _hireDate: string,
+    // 入社日
+    private _hireDate: Date,
     // メールアドレス
     private _mailAddress: string,
     // 郵便番号
@@ -63,11 +63,11 @@ export class Employee {
     this._gender = gender;
   }
 
-  public get hireDate(): string {
+  public get hireDate(): Date {
     return this._hireDate;
   }
 
-  public set hireDate(hireDate: string) {
+  public set hireDate(hireDate: Date) {
     this._hireDate = hireDate;
   }
 

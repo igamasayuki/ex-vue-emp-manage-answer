@@ -84,7 +84,7 @@ export default class RegisterAdmin extends Vue {
   lastName = "";
   // 名
   firstName = "";
-  // メールアドrす
+  // メールアドレス
   mailAddress = "";
   // パスワード
   password = "";
