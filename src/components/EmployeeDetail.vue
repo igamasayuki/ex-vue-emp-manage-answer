@@ -101,6 +101,8 @@ import { Component, Vue } from "vue-property-decorator";
 // import { Employee } from "../types/employee";
 import { Employee } from "@/types/employee";
 import axios from "axios";
+// グローバル定数の読み込み
+import config from "../const/const";
 
 @Component
 export default class EmployeeDetail extends Vue {
@@ -138,7 +140,7 @@ export default class EmployeeDetail extends Vue {
    */
   async update(): Promise<void> {
     const response = await axios.post(
-      "http://localhost:8080/ex-emp/employee/update",
+      `${config.EMP_WEBAPI_URL}/employee/update`,
       {
         id: this.currentEmployee.id,
         dependentsCount: this.currentDependentsCount,

@@ -5,7 +5,8 @@ import { Employee } from "@/types/employee";
 // npm install axios --save
 //」を行う
 import axios from "axios";
-
+// グローバル定数の読み込み
+import config from "../const/const";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -23,7 +24,7 @@ export default new Vuex.Store({
     async getEmployeeList(context) {
       // WebAPIから従業員一覧情報を取得する
       const response = await axios.get(
-        "http://localhost:8080/ex-emp/employee/employees"
+        `${config.EMP_WEBAPI_URL}/employee/employees`
       );
       // 取得したJSONデータをコンソールに出力して確認
       console.dir("response:" + JSON.stringify(response));

@@ -73,6 +73,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
+// グローバル定数の読み込み
+import config from "../const/const";
 
 @Component
 export default class RegisterAdmin extends Vue {
@@ -94,6 +96,8 @@ export default class RegisterAdmin extends Vue {
    *
    * @remarks
    * 本メソッドは非同期でWebAPIを呼び出し管理者登録をするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
+   * 動作確認用curlコマンド
+   * curl -X POST -H "Content-Type: application/json" -d '{"name":"テスト太郎","mailAddress":"test@gmail.com", "password":"testtesttest"}' "http://153.127.48.168:8080/ex-emp-api/insert"
    * @returns Promiseオブジェクト
    */
   async registerAdmin(): Promise<void> {
@@ -114,7 +118,7 @@ export default class RegisterAdmin extends Vue {
     }
 
     // 管理者登録処理
-    const response = await axios.post("http://localhost:8080/ex-emp/insert", {
+    const response = await axios.post(`${config.EMP_WEBAPI_URL}/insert`, {
       name: this.lastName + " " + this.firstName,
       mailAddress: this.mailAddress,
       password: this.password,

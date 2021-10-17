@@ -1,7 +1,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
-
+// グローバル定数の読み込み
+import config from "../const/const";
 @Component
 export default class LogoutAdmin extends Vue {
   /**
@@ -12,7 +13,9 @@ export default class LogoutAdmin extends Vue {
    * @returns Promiseオブジェクト
    */
   async logoutAdmin(): Promise<void> {
-    const response = await axios.get("http://localhost:8080/ex-emp/logout");
+    const response = await axios.get(
+      `${config.EMP_WEBAPI_URL}/employee/logout`
+    );
     console.dir("response:" + JSON.stringify(response));
     // ログイン画面に遷移する
     this["$router"].push("/loginAdmin");

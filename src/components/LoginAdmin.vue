@@ -55,6 +55,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
+// グローバル定数の読み込み
+import config from "../const/const";
 
 @Component
 export default class LoginAdmin extends Vue {
@@ -67,10 +69,12 @@ export default class LoginAdmin extends Vue {
    *
    * @remarks
    * 本メソッドは非同期でWebAPIを呼び出しログインをするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
+   * 動作確認用curlコマンド
+   * curl -X POST -H "Content-Type: application/json" -d '{"mailAddress":"test@test.com", "password":"testtesttest"}' "http://153.127.48.168:8080/ex-emp-api/login"
    * @returns Promiseオブジェクト
    */
   async loginAdmin(): Promise<void> {
-    const response = await axios.post("http://localhost:8080/ex-emp/login", {
+    const response = await axios.post(`${config.EMP_WEBAPI_URL}/login`, {
       mailAddress: this.mailAddress,
       password: this.password,
     });
