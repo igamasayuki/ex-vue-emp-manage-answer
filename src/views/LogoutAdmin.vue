@@ -2,7 +2,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 // グローバル定数の読み込み
-import config from "../const/const";
+import config from "@/const/const";
 @Component
 export default class LogoutAdmin extends Vue {
   /**

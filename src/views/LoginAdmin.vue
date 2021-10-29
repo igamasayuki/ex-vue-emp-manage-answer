@@ -56,13 +56,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 // グローバル定数の読み込み
-import config from "../const/const";
+import config from "@/const/const";
 
 @Component
 export default class LoginAdmin extends Vue {
-  errorMessage = "";
-  mailAddress = "";
-  password = "";
+  private errorMessage = "";
+  private mailAddress = "";
+  private password = "";
 
   /**
    * ログインする.

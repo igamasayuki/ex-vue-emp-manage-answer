@@ -79,17 +79,17 @@ import config from "../const/const";
 @Component
 export default class RegisterAdmin extends Vue {
   // 入力値チェックのエラーメッセージ
-  errors: Array<string> = [];
+  private errors: Array<string> = [];
   // 登録失敗時のエラーメッセージ
-  errorMessage = "";
+  private errorMessage = "";
   // 姓
-  lastName = "";
+  private lastName = "";
   // 名
-  firstName = "";
+  private firstName = "";
   // メールアドレス
-  mailAddress = "";
+  private mailAddress = "";
   // パスワード
-  password = "";
+  private password = "";
 
   /**
    * 管理者情報を登録する.

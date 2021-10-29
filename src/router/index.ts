@@ -6,28 +6,28 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/logoutAdmin",
-    component: () => import("../components/LoginAdmin.vue"),
+    component: () => import("../views/LoginAdmin.vue"),
   },
   {
     path: "/employeeDetail/:id",
-    component: () => import("../components/EmployeeDetail.vue"),
+    component: () => import("../views/EmployeeDetail.vue"),
   },
   {
     path: "/employeeList",
-    component: () => import("../components/EmployeeList.vue"),
+    component: () => import("../views/EmployeeList.vue"),
   },
   {
     path: "/loginAdmin",
-    component: () => import("../components/LoginAdmin.vue"),
+    component: () => import("../views/LoginAdmin.vue"),
   },
   {
     path: "/registerAdmin",
-    component: () => import("../components/RegisterAdmin.vue"),
+    component: () => import("../views/RegisterAdmin.vue"),
   },
   // パスが登録されていない場合はログイン画面へ
   {
     path: "*",
-    component: () => import("../components/LoginAdmin.vue"),
+    component: () => import("../views/LoginAdmin.vue"),
   },
 ];
 
