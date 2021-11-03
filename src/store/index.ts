@@ -50,7 +50,6 @@ export default new Vuex.Store({
       state.totalEmployeeCount = payload.totalEmployees;
       // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
       // stateのemployeesにpushする
-      state.employees = new Array<Employee>();
       for (const employee of payload.employees) {
         state.employees.push(
           new Employee(
@@ -79,7 +78,9 @@ export default new Vuex.Store({
      * @returns 従業員数
      */
     getEmployeeCount(state) {
-      return state.employees.length;
+      return state.totalEmployeeCount;
+      // 下記でも同様に動きます
+      // return state.employees.length;
     },
     /**
      * 従業員一覧を返す.
