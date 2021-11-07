@@ -10,16 +10,17 @@
 </template>
 
 <script>
+import { Component, Vue } from "vue-property-decorator";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
-export default {
-  name: "app",
+@Component({
   components: {
     Header,
     Footer,
   },
-};
+})
+export default class App extends Vue {}
 </script>
 
 <style>
