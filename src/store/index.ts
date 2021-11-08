@@ -47,9 +47,11 @@ export default new Vuex.Store({
       // console.dir("payload:" + JSON.stringify(payload));
       console.log("totalEmployeeCount:" + payload.totalEmployeeCount);
       // payloadの中(WebAPIから取得したJSON)のtotalEmployeeCountをstateのtotalEmployeeCountに代入する
-      state.totalEmployeeCount = payload.totalEmployees;
+      state.totalEmployeeCount = payload.totalEmployeeCount;
       // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
       // stateのemployeesにpushする
+      // state.employees = payload.employees;
+
       for (const employee of payload.employees) {
         state.employees.push(
           new Employee(
