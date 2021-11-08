@@ -50,26 +50,27 @@ export default new Vuex.Store({
       state.totalEmployeeCount = payload.totalEmployeeCount;
       // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
       // stateのemployeesにpushする
-      // state.employees = payload.employees;
+      state.employees = payload.employees;
 
-      for (const employee of payload.employees) {
-        state.employees.push(
-          new Employee(
-            employee.id,
-            employee.name,
-            employee.image,
-            employee.gender,
-            employee.hireDate,
-            employee.mailAddress,
-            employee.zipCode,
-            employee.address,
-            employee.telephone,
-            employee.salary,
-            employee.characteristics,
-            employee.dependentsCount
-          )
-        );
-      }
+      // 上記の１行は以下と同じことをやっています。
+      // for (const employee of payload.employees) {
+      //   state.employees.push(
+      //     new Employee(
+      //       employee.id,
+      //       employee.name,
+      //       employee.image,
+      //       employee.gender,
+      //       employee.hireDate,
+      //       employee.mailAddress,
+      //       employee.zipCode,
+      //       employee.address,
+      //       employee.telephone,
+      //       employee.salary,
+      //       employee.characteristics,
+      //       employee.dependentsCount
+      //     )
+      //   );
+      // }
     },
   }, // end mutations
   getters: {

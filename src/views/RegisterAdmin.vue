@@ -97,7 +97,7 @@ export default class RegisterAdmin extends Vue {
    * @remarks
    * 本メソッドは非同期でWebAPIを呼び出し管理者登録をするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
    * 動作確認用curlコマンド
-   * curl -X POST -H "Content-Type: application/json" -d '{"name":"テスト太郎","mailAddress":"test@gmail.com", "password":"testtesttest"}' "http://153.127.48.168:8080/ex-emp-api/insert"
+   * curl -X POST -H "Content-Type: application/json" -d '{"name":"テスト太郎","mailAddress":"test10@gmail.com", "password":"testtesttest"}' "http://153.127.48.168:8080/ex-emp-api/insert"
    * @returns Promiseオブジェクト
    */
   async registerAdmin(): Promise<void> {
