@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div>従業員数:{{ getEmployeeCount }}人</div>
+    <div>従業員数:{{ employeeCount }}人</div>
     <div class="row">
       <table class="striped">
         <thead>
@@ -12,7 +12,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="employee of getEmployees" v-bind:key="employee.id">
+          <tr v-for="employee of employees" v-bind:key="employee.id">
             <td>
               <router-link :to="'/employeeDetail/' + employee.id">{{
                 employee.name
@@ -50,7 +50,7 @@ export default class EmployeeList extends Vue {
    *
    * @returns 従業員数
    */
-  get getEmployeeCount(): number {
+  get employeeCount(): number {
     return this["$store"].getters.getEmployeeCount;
   }
   /**
@@ -58,7 +58,7 @@ export default class EmployeeList extends Vue {
    *
    * @returns 従業員一覧情報
    */
-  get getEmployees(): Array<Employee> {
+  get employees(): Array<Employee> {
     return this["$store"].getters.getEmployees;
   }
 }
