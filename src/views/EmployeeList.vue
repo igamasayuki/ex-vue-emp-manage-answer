@@ -42,7 +42,7 @@ export default class EmployeeList extends Vue {
    * ライフサイクルフックのcreatedイベント利用
    */
   created(): void {
-    this["$store"].dispatch("getEmployeeList");
+    this.$store.dispatch("getEmployeeList");
   }
 
   /**
@@ -51,7 +51,7 @@ export default class EmployeeList extends Vue {
    * @returns 従業員数
    */
   get employeeCount(): number {
-    return this["$store"].getters.getEmployeeCount;
+    return this.$store.getters.getEmployeeCount;
   }
   /**
    * 非同期で取得したVuexストア内の従業員一覧を取得し返す.
@@ -59,7 +59,7 @@ export default class EmployeeList extends Vue {
    * @returns 従業員一覧情報
    */
   get employees(): Array<Employee> {
-    return this["$store"].getters.getEmployees;
+    return this.$store.getters.getEmployees;
   }
 }
 </script>

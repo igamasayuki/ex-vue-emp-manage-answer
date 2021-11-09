@@ -27,7 +27,7 @@ export default new Vuex.Store({
         `${config.EMP_WEBAPI_URL}/employee/employees`
       );
       // 取得したJSONデータをコンソールに出力して確認
-      console.dir("response:" + JSON.stringify(response));
+      // console.dir("response:" + JSON.stringify(response));
       // 取得したresponseデータの中のdataを取り出してpayload変数に格納する
       const payload = response.data;
       // showEmployeeListという名前のミューテーションを呼び出す
@@ -48,11 +48,10 @@ export default new Vuex.Store({
       console.log("totalEmployeeCount:" + payload.totalEmployeeCount);
       // payloadの中(WebAPIから取得したJSON)のtotalEmployeeCountをstateのtotalEmployeeCountに代入する
       state.totalEmployeeCount = payload.totalEmployeeCount;
-      // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
-      // stateのemployeesにpushする
+      // payloadの中(WebAPIから取得したJSON)のemployeesをstateのemployeesに代入する
       state.employees = payload.employees;
 
-      // 上記の１行は以下と同じことをやっています。
+      // 上記の１行は以下とほぼ同じことをやっています。
       // for (const employee of payload.employees) {
       //   state.employees.push(
       //     new Employee(

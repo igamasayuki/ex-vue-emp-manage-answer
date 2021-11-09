@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/logoutAdmin",
-    component: () => import("../views/LoginAdmin.vue"),
+    component: () => import("../views/LogoutAdmin.vue"),
   },
   {
     path: "/employeeDetail/:id",
