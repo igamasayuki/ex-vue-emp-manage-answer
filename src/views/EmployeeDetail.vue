@@ -121,10 +121,13 @@ export default class EmployeeDetail extends Vue {
   created(): void {
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
     const employeeId = parseInt(this.$route.params.id);
+
     // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
     this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
+
     // 今取得した従業員情報から画像パスを取り出し、外部WebAPIサーバー内のimgディレクトリからパスを指定して取得し、currentEmployeeImage属性に代入する
     this.currentEmployeeImage = `${config.EMP_WEBAPI_URL}/img/${this.currentEmployee.image}`;
+
     // 今取得した従業員情報から扶養人数を取り出し、currentDependentsCount属性に代入する
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
   }
