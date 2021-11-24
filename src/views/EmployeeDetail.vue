@@ -103,9 +103,22 @@ import config from "@/const/const";
 
 @Component
 export default class EmployeeDetail extends Vue {
-  // !はこの変数がnullでないことを保証する(Non-null assertion operator)
-  // !がないと、update時の「this.currentEmployee.id」部分警告が出てしまうため必要
-  private currentEmployee!: Employee;
+  // 従業員情報
+  // 初期値で初期化しなければtemplateでidなどが存在しないということでエラーとなる
+  private currentEmployee = new Employee(
+    0,
+    "XXXX",
+    "/img/noImage.png",
+    "XXXX",
+    new Date(2020, 0, 1),
+    "XXXX",
+    "XXXX",
+    "XXXX",
+    "XXXX",
+    0,
+    "XXXX",
+    0
+  );
   private errorMessage = "";
   private currentEmployeeImage = "";
   private currentDependentsCount = 0;
