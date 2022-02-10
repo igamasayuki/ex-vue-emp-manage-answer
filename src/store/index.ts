@@ -7,6 +7,9 @@ import { Employee } from "@/types/employee";
 import axios from "axios";
 // グローバル定数の読み込み
 import config from "../const/const";
+// 使うためには「npm install --save vuex-persistedstate」を行う
+import createPersistedState from "vuex-persistedstate";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -19,7 +22,7 @@ export default new Vuex.Store({
     /**
      * 従業員一覧情報をWebAPIから取得してmutationを呼び出す.
      *
-     * @param context コンテキスト
+     * @param context - コンテキスト
      */
     async getEmployeeList(context) {
       // WebAPIから従業員一覧情報を取得する
@@ -40,8 +43,8 @@ export default new Vuex.Store({
     /**
      * 従業員一覧情報を作成してstateに格納する.
      *
-     * @param context コンテキスト
-     * @param payload WebAPIから取得した従業員情報(JSON)
+     * @param context - コンテキスト
+     * @param payload - WebAPIから取得した従業員情報(JSON)
      */
     showEmployeeList(state, payload) {
       // console.dir("payload:" + JSON.stringify(payload));
@@ -78,7 +81,7 @@ export default new Vuex.Store({
     /**
      * 従業員数を返す.
      *
-     * @param state ステート
+     * @param state - ステート
      * @returns 従業員数
      */
     getEmployeeCount(state) {
@@ -89,27 +92,73 @@ export default new Vuex.Store({
     /**
      * 従業員一覧を返す.
      *
-     * @param state ステート
+     * @param state - ステート
      * @returns 従業員一覧情報「
      */
     getEmployees(state) {
-      return state.employees;
+      console.dir(JSON.stringify(state.employees));
+      const array = new Array<Employee>();
+      for (const employee of state.employees) {
+        array.push(
+          new Employee(
+            employee._id,
+            employee._name,
+            employee._image,
+            employee._gender,
+            employee._hireDate,
+            employee._mailAddress,
+            employee._zipCode,
+            employee._address,
+            employee._telephone,
+            employee._salary,
+            employee._characteristics,
+            employee._dependentsCount
+          )
+        );
+      }
+      return array;
     },
     /**
      * IDから従業員を検索し返す.
      *
-     * @param state ステート
+     * @param state - ステート
      * @returns 従業員情報
      */
     getEmployeeById(state) {
       // 渡されたIDで絞り込んだEmployeeオブジェクトを1件返す
       return (employeeId: number) => {
-        const employees = state.employees.filter(
-          (employee) => employee.id == employeeId
-        );
-        return employees[0];
+        // const employees = state.employees.filter(
+        //   (employee) => employee._id == employeeId
+        // );
+
+        for (const employee of state.employees) {
+          if (employee._id === employeeId) {
+            return new Employee(
+              employee._id,
+              employee._name,
+              employee._image,
+              employee._gender,
+              employee._hireDate,
+              employee._mailAddress,
+              employee._zipCode,
+              employee._address,
+              employee._telephone,
+              employee._salary,
+              employee._characteristics,
+              employee._dependentsCount
+            );
+          }
+        }
       };
     },
   }, // end getters
   modules: {}, // end modules
+  plugins: [
+    createPersistedState({
+      // ストレージのキーを指定
+      key: "vuex",
+      // ストレージの種類を指定
+      storage: window.sessionStorage,
+    }),
+  ],
 });

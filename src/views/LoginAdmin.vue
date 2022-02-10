@@ -58,10 +58,16 @@ import axios from "axios";
 // グローバル定数の読み込み
 import config from "@/const/const";
 
+/**
+ * ログイン処理をするコンポーネント.
+ */
 @Component
 export default class LoginAdmin extends Vue {
+  // エラーメッセージ
   private errorMessage = "";
+  // メールアドレス
   private mailAddress = "";
+  // パスワード
   private password = "";
 
   /**
@@ -78,7 +84,9 @@ export default class LoginAdmin extends Vue {
       mailAddress: this.mailAddress,
       password: this.password,
     });
+
     console.dir("response:" + JSON.stringify(response));
+    
     if (response.data.status == "success") {
       // 従業員一覧に遷移する
       this.$router.push("/employeeList");

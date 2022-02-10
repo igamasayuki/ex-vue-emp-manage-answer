@@ -6,6 +6,10 @@ import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 // グローバル定数の読み込み
 import config from "@/const/const";
+
+/**
+ * ログアウト処理をするコンポーネント.
+ */
 @Component
 export default class LogoutAdmin extends Vue {
   /**
@@ -19,9 +23,10 @@ export default class LogoutAdmin extends Vue {
     console.log("logout!");
 
     const response = await axios.get(`${config.EMP_WEBAPI_URL}/logout`);
+
     console.dir("response:" + JSON.stringify(response));
+
     // ログイン画面に遷移する
-    // this.$router.push("/loginAdmin");
     this.$router.push("/loginAdmin");
   }
 }

@@ -73,7 +73,6 @@
                   id="dependentsCount"
                   type="text"
                   class="validate"
-                  value="3"
                   v-model="currentDependentsCount"
                   required
                 />
@@ -101,6 +100,9 @@ import axios from "axios";
 // グローバル定数の読み込み
 import config from "@/const/const";
 
+/**
+ * 従業員情報を表示するコンポーネント.
+ */
 @Component
 export default class EmployeeDetail extends Vue {
   // 従業員情報
@@ -119,8 +121,11 @@ export default class EmployeeDetail extends Vue {
     "XXXX",
     0
   );
+  // エラーメッセージ
   private errorMessage = "";
+  // 画像ファイル名
   private currentEmployeeImage = "";
+  // 扶養人数
   private currentDependentsCount = 0;
 
   /**
@@ -133,15 +138,15 @@ export default class EmployeeDetail extends Vue {
    */
   created(): void {
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
-    const employeeId = parseInt(this.$route.params.id);
+    const employeeId = Number(this.$route.params.id);
 
-    // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
+    // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployeeに代入する
     this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
 
-    // 今取得した従業員情報から画像パスを取り出し、外部WebAPIサーバー内のimgディレクトリからパスを指定して取得し、currentEmployeeImage属性に代入する
+    // 取得した従業員情報から画像ファイル名を取り出し、外部WebAPIサーバー内のimgディレクトリからパスを指定して取得し、currentEmployeeImageに代入する
     this.currentEmployeeImage = `${config.EMP_WEBAPI_URL}/img/${this.currentEmployee.image}`;
 
-    // 今取得した従業員情報から扶養人数を取り出し、currentDependentsCount属性に代入する
+    // 取得した従業員情報から扶養人数を取り出し、currentDependentsCountに代入する
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
   }
 

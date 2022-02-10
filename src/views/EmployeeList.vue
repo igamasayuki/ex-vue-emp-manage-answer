@@ -31,6 +31,9 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Employee } from "@/types/employee";
 
+/**
+ * 従業員一覧を表示するコンポーネント.
+ */
 @Component
 export default class EmployeeList extends Vue {
   /**
