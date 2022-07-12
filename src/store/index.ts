@@ -7,8 +7,6 @@ import { Employee } from "@/types/employee";
 import axios from "axios";
 // グローバル定数の読み込み
 import config from "../const/const";
-// 使うためには「npm install --save vuex-persistedstate」を行う
-import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -135,12 +133,4 @@ export default new Vuex.Store({
     },
   }, // end getters
   modules: {}, // end modules
-  plugins: [
-    createPersistedState({
-      // ストレージのキーを指定
-      key: "vuex",
-      // ストレージの種類を指定
-      storage: window.sessionStorage,
-    }),
-  ],
 });
