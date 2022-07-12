@@ -7,30 +7,31 @@
 export class Employee {
   constructor(
     // ID
-    public _id: number,
+    private _id: number,
     // 名前
-    public _name: string,
+    private _name: string,
     // 画像
-    public _image: string,
+    private _image: string,
     // 性別
-    public _gender: string,
+    private _gender: string,
     // 入社日
-    public _hireDate: Date,
+    private _hireDate: Date,
     // メールアドレス
-    public _mailAddress: string,
+    private _mailAddress: string,
     // 郵便番号
-    public _zipCode: string,
+    private _zipCode: string,
     // 住所
-    public _address: string,
+    private _address: string,
     // 電話番号
     public _telephone: string,
     // 給料
-    public _salary: number,
+    private _salary: number,
     // 特性
-    public _characteristics: string,
+    private _characteristics: string,
     // 扶養人数
-    public _dependentsCount: number
+    private _dependentsCount: number
   ) {}
+
   public get id(): number {
     return this._id;
   }
