@@ -97,26 +97,26 @@ export default new Vuex.Store({
      */
     getEmployees(state) {
       console.dir(JSON.stringify(state.employees));
-      const array = new Array<Employee>();
+      const employees = new Array<Employee>();
       for (const employee of state.employees) {
-        array.push(
+        employees.push(
           new Employee(
-            employee._id,
-            employee._name,
-            employee._image,
-            employee._gender,
-            employee._hireDate,
-            employee._mailAddress,
-            employee._zipCode,
-            employee._address,
-            employee._telephone,
-            employee._salary,
-            employee._characteristics,
-            employee._dependentsCount
+            employee.id,
+            employee.name,
+            employee.image,
+            employee.gender,
+            employee.hireDate,
+            employee.mailAddress,
+            employee.zipCode,
+            employee.address,
+            employee.telephone,
+            employee.salary,
+            employee.characteristics,
+            employee.dependentsCount
           )
         );
       }
-      return array;
+      return employees;
     },
     /**
      * IDから従業員を検索し返す.
@@ -127,28 +127,10 @@ export default new Vuex.Store({
     getEmployeeById(state) {
       // 渡されたIDで絞り込んだEmployeeオブジェクトを1件返す
       return (employeeId: number) => {
-        // const employees = state.employees.filter(
-        //   (employee) => employee._id == employeeId
-        // );
-
-        for (const employee of state.employees) {
-          if (employee._id === employeeId) {
-            return new Employee(
-              employee._id,
-              employee._name,
-              employee._image,
-              employee._gender,
-              employee._hireDate,
-              employee._mailAddress,
-              employee._zipCode,
-              employee._address,
-              employee._telephone,
-              employee._salary,
-              employee._characteristics,
-              employee._dependentsCount
-            );
-          }
-        }
+        const employees = state.employees.filter(
+          (employee) => employee.id === employeeId
+        );
+        return employees[0];
       };
     },
   }, // end getters
