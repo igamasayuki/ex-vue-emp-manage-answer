@@ -112,7 +112,7 @@ export default class EmployeeDetail extends Vue {
     "XXXX",
     "/img/noImage.png",
     "XXXX",
-    new Date(2020, 0, 1),
+    "2020-1-1",
     "XXXX",
     "XXXX",
     "XXXX",
